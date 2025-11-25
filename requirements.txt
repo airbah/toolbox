@@ -1,0 +1,6 @@
+flet==0.28.2
+piexif
+send2trash
+pytesseract
+Pillow
+colorgram.py
