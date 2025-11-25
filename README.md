@@ -33,18 +33,44 @@ Application de bureau construite avec [Flet](https://flet.dev/) qui regroupe plu
 - Dépendances Python listées dans `requirements.txt`.
 - Pour l'OCR : installer [Tesseract](https://tesseract-ocr.github.io/) et s'assurer que l'exécutable est dans le `PATH`.
 
+### Installer Python
+- **Windows** :
+  1. Télécharger l'installateur depuis [python.org/downloads](https://www.python.org/downloads/windows/).
+  2. Cocher l'option "Add Python to PATH" au lancement de l'installateur.
+  3. Terminer l'installation puis redémarrer le terminal pour que `python` et `pip` soient reconnus.
+- **macOS** :
+  1. Installer [Homebrew](https://brew.sh/) si nécessaire.
+  2. Exécuter `brew install python` pour obtenir la dernière version stable.
+  3. Vérifier l'installation avec `python3 --version` et utiliser `pip3` ou `python3 -m pip` pour installer les dépendances.
+
+### Installer Tesseract
+- **Windows** :
+  1. Télécharger le dernier exécutable depuis la page des [releases GitHub](https://github.com/UB-Mannheim/tesseract/wiki) (version UB Mannheim recommandée).
+  2. Pendant l'installation, cocher l'ajout de Tesseract au `PATH` et installer les langues souhaitées.
+  3. Redémarrer le terminal puis vérifier avec `tesseract --version` que la commande est disponible.
+- **macOS** :
+  1. Installer Homebrew puis exécuter `brew install tesseract`.
+  2. Ajouter des packs de langues si besoin : `brew install tesseract-lang` ou `brew install tesseract-lang-fra` pour le français.
+  3. Vérifier l'installation avec `tesseract --version`.
+
 ## Installation
-```bash
-python -m venv .venv
-source .venv/bin/activate  # ou .venv\Scripts\activate sous Windows
-pip install -r requirements.txt
-```
+- **Windows** :
+  1. Ouvrir PowerShell dans le dossier du projet.
+  2. Créer un environnement virtuel : `python -m venv .venv`.
+  3. Activer l'environnement : `.venv\Scripts\Activate.ps1` (ou `activate.bat` si PowerShell est restreint).
+  4. Installer les dépendances : `pip install -r requirements.txt`.
+
+- **macOS** :
+  1. Depuis le Terminal, se placer dans le dossier du projet.
+  2. Créer un environnement virtuel : `python3 -m venv .venv`.
+  3. Activer l'environnement : `source .venv/bin/activate`.
+  4. Installer les dépendances : `pip install -r requirements.txt`.
 
 ## Lancement de l'application
 Exécuter l'application Flet en local :
-```bash
-python main.py
-```
+- **Windows** : `python main.py` (dans PowerShell ou l'invite de commandes après activation de l'environnement virtuel).
+- **macOS** : `python3 main.py` (dans le Terminal après activation de l'environnement virtuel).
+
 L'interface se lance avec la barre latérale de navigation. Chaque module gère son propre sélecteur de fichiers/dossiers via les composants Flet.
 
 ## Arborescence principale
