@@ -1,80 +1,73 @@
-# File Toolbox
+# 📦 File Toolbox
 
-Application de bureau construite avec [Flet](https://flet.dev/) qui regroupe plusieurs outils autour de la gestion de fichiers et d'images. Une barre de navigation permet d'accéder rapidement aux modules disponibles (renommage, détection de doublons, OCR pour captures d'écran, extraction de palette de couleurs) ainsi qu'aux modules à venir (tri, nettoyage EXIF).
+Application de bureau Flet regroupant plusieurs outils pour gérer et nettoyer vos fichiers et images. Une barre de navigation latérale vous permet de passer d'un module à l'autre en un clic.
 
-## Fonctionnalités
+- 🎯 **Productivité** : actions groupées, raccourcis clairs, feedback immédiat.
+- 🖼️ **Images** : OCR pour captures d'écran, extraction de palettes, pipette intégrée.
+- 🗂️ **Fichiers** : renommage en masse, détection intelligente des doublons.
 
-### Renommer des fichiers
-- Sélectionner ou glisser-déposer des fichiers, visualiser leurs noms actuels et les nouveaux noms prévus.
-- Ajouter un préfixe/suffixe, faire des remplacements ciblés, ou générer une numérotation automatique pour chaque fichier sélectionné.
-- Appliquer les changements et vider la liste en un clic via les actions dédiées.
+---
 
-### Détecter et gérer les doublons
-- Choisir un dossier (avec option récursive) et définir une taille minimale avant de lancer le scan.
-- Barre de progression et messages d'état pendant les trois phases : découverte, pré-hachage, hachage complet.
-- Affichage des groupes de doublons trouvés, sélection manuelle ou intelligente (garder le plus récent/ancien), ouverture directe des fichiers, et suppression vers la corbeille.
+## 🚀 Aperçu rapide
+| Module | À quoi ça sert ? | Points forts |
+| --- | --- | --- |
+| Renommage | Renommer une sélection de fichiers. | Préfixe/suffixe, remplacement ciblé, numérotation auto, vider la liste en un clic. |
+| Doublons | Détecter les fichiers identiques dans un dossier. | Scan récursif optionnel, progression détaillée, sélection intelligente (plus récent/ancien), suppression vers corbeille. |
+| OCR Screenshots | Organiser des captures d'écran via l'OCR. | Choix de langue, réglage du nombre de mots clés, aperçu du texte détecté, édition manuelle des nouveaux noms. |
+| Palette de couleurs | Extraire les couleurs dominantes d'une image. | Support JPG/PNG/WebP, zoom + pipette, copie HEX, suppression d'une couleur. |
+| File Sorter (à venir) | Préparer un tri automatique. | Interface prête, logique à finaliser. |
+| EXIF Cleaner (à venir) | Nettoyer les métadonnées EXIF. | Écran placeholder en attendant l'implémentation. |
 
-### Organiser des captures d'écran par OCR
-- Sélection de captures d'écran (via file picker dédié) puis extraction de texte avec Tesseract.
-- Choix de la langue OCR et du nombre de mots clés à conserver pour générer automatiquement de nouveaux noms de fichier.
-- Aperçu du texte détecté, édition manuelle des nouveaux noms et renommage en lot une fois l'analyse terminée.
+---
 
-### Extraire une palette de couleurs
-- Charger une image (JPG/PNG/WebP) et extraire automatiquement un ensemble de couleurs dominantes (2 à 32 couleurs).
-- Affichage de l'image avec zoom et pipette : un clic sur le visuel ajoute la couleur au tableau.
-- Cartes de couleurs interactives : suppression d'une couleur ou copie du code HEX dans le presse-papiers en un clic.
+## 📥 Installation express
+> Python 3.10+ est requis. Assurez-vous que `pip` est disponible dans votre terminal.
 
-### Modules à venir
-- **File Sorter** : interface prête mais logique métier à compléter.
-- **EXIF Cleaner** : écran placeholder en attendant l'implémentation de la suppression des métadonnées.
+```bash
+# Cloner le projet
+git clone <url-du-repo>
+cd toolbox
 
-## Prérequis
-- Python 3.10 ou supérieur.
-- Dépendances Python listées dans `requirements.txt`.
-- Pour l'OCR : installer [Tesseract](https://tesseract-ocr.github.io/) et s'assurer que l'exécutable est dans le `PATH`.
+# Créer un environnement virtuel
+python -m venv .venv
 
-### Installer Python
-- **Windows** :
-  1. Télécharger l'installateur depuis [python.org/downloads](https://www.python.org/downloads/windows/).
-  2. Cocher l'option "Add Python to PATH" au lancement de l'installateur.
-  3. Terminer l'installation puis redémarrer le terminal pour que `python` et `pip` soient reconnus.
-- **macOS** :
-  1. Installer [Homebrew](https://brew.sh/) si nécessaire.
-  2. Exécuter `brew install python` pour obtenir la dernière version stable.
-  3. Vérifier l'installation avec `python3 --version` et utiliser `pip3` ou `python3 -m pip` pour installer les dépendances.
+# Activer l'environnement
+# Windows
+.venv\Scripts\Activate.ps1
+# macOS / Linux
+source .venv/bin/activate
 
-### Installer Tesseract
-- **Windows** :
-  1. Télécharger le dernier exécutable depuis la page des [releases GitHub](https://github.com/UB-Mannheim/tesseract/wiki) (version UB Mannheim recommandée).
-  2. Pendant l'installation, cocher l'ajout de Tesseract au `PATH` et installer les langues souhaitées.
-  3. Redémarrer le terminal puis vérifier avec `tesseract --version` que la commande est disponible.
-- **macOS** :
-  1. Installer Homebrew puis exécuter `brew install tesseract`.
-  2. Ajouter des packs de langues si besoin : `brew install tesseract-lang` ou `brew install tesseract-lang-fra` pour le français.
-  3. Vérifier l'installation avec `tesseract --version`.
+# Installer les dépendances
+pip install -r requirements.txt
+```
 
-## Installation
-- **Windows** :
-  1. Ouvrir PowerShell dans le dossier du projet.
-  2. Créer un environnement virtuel : `python -m venv .venv`.
-  3. Activer l'environnement : `.venv\Scripts\Activate.ps1` (ou `activate.bat` si PowerShell est restreint).
-  4. Installer les dépendances : `pip install -r requirements.txt`.
+### OCR : installer Tesseract
+- **Windows** : télécharger la version UB Mannheim depuis la page des [releases GitHub](https://github.com/UB-Mannheim/tesseract/wiki), ajouter Tesseract au `PATH`, puis vérifier avec `tesseract --version`.
+- **macOS** : `brew install tesseract` puis, si besoin, installer les packs de langues (`brew install tesseract-lang` ou `brew install tesseract-lang-fra`).
 
-- **macOS** :
-  1. Depuis le Terminal, se placer dans le dossier du projet.
-  2. Créer un environnement virtuel : `python3 -m venv .venv`.
-  3. Activer l'environnement : `source .venv/bin/activate`.
-  4. Installer les dépendances : `pip install -r requirements.txt`.
+---
 
-## Lancement de l'application
-Exécuter l'application Flet en local :
-- **Windows** : `python main.py` (dans PowerShell ou l'invite de commandes après activation de l'environnement virtuel).
-- **macOS** : `python3 main.py` (dans le Terminal après activation de l'environnement virtuel).
+## ▶️ Lancer l'application
+```bash
+# Une fois l'environnement activé
+python main.py  # ou python3 main.py sur macOS/Linux
+```
 
-L'interface se lance avec la barre latérale de navigation. Chaque module gère son propre sélecteur de fichiers/dossiers via les composants Flet.
+L'interface Flet s'ouvre avec la navigation latérale. Chaque module inclut son propre sélecteur de fichiers ou de dossiers.
 
-## Arborescence principale
-- `main.py` : point d'entrée Flet et navigation entre vues.
-- `views/` : composants UI par fonctionnalité (renommage, doublons, OCR, palette, etc.).
-- `utils/` : helpers (styles, gestion de fichiers, détection de doublons, OCR).
-- `requirements.txt` : dépendances Python.
+---
+
+## 🧭 Arborescence
+```
+main.py            # Point d'entrée Flet et navigation entre vues
+views/             # Composants UI par fonctionnalité
+utils/             # Helpers (styles, fichiers, doublons, OCR)
+requirements.txt   # Dépendances Python
+```
+
+---
+
+## 🛠️ Besoin d'aide ?
+- Vérifiez que Tesseract est bien installé et accessible depuis votre terminal si l'OCR échoue.
+- Sur Windows, exécutez le terminal en mode « Administrator » si l'activation de l'environnement virtuel échoue.
+- En cas de souci, ouvrez une issue ou décrivez le module concerné et les actions effectuées.
