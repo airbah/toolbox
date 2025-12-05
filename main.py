@@ -8,6 +8,7 @@ from utils.styles import ColorPalette
 from views.color_palette_view import ColorPaletteView
 from views.video_recorder_view import VideoRecorderView
 from views.emoji_maker_view import EmojiMakerView
+from views.invoice_sorter_view import InvoiceSorterView
 
 def main(page: ft.Page):
     page.title = "File Toolbox"
@@ -79,6 +80,8 @@ def main(page: ft.Page):
             view = EmojiMakerView(page, emoji_file_picker)
             emoji_file_picker.on_result = view.on_file_selected
             return view
+        elif index == 8:
+            return InvoiceSorterView(page)
 
     def on_nav_change(e):
         nonlocal current_view_index
@@ -133,6 +136,11 @@ def main(page: ft.Page):
                 icon=ft.Icons.EMOJI_EMOTIONS, 
                 selected_icon=ft.Icons.EMOJI_EMOTIONS_ROUNDED, 
                 label="Emoji"
+            ),
+            ft.NavigationRailDestination(
+                icon=ft.Icons.RECEIPT_LONG, 
+                selected_icon=ft.Icons.RECEIPT_LONG_ROUNDED, 
+                label="Factures"
             ),
         ],
         on_change=on_nav_change,
