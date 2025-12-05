@@ -4,3 +4,8 @@ send2trash
 pytesseract
 Pillow
 colorgram.py
+mss
+opencv-python
+numpy
+pyaudiowpatch
+pywin32

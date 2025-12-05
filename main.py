@@ -6,6 +6,8 @@ from views.ocr_view import OCRView
 from views.exif_view import ExifView
 from utils.styles import ColorPalette
 from views.color_palette_view import ColorPaletteView
+from views.video_recorder_view import VideoRecorderView
+from views.emoji_maker_view import EmojiMakerView
 
 def main(page: ft.Page):
     page.title = "File Toolbox"
@@ -45,6 +47,14 @@ def main(page: ft.Page):
     palette_file_picker = ft.FilePicker()
     page.overlay.append(palette_file_picker)
 
+    # Create file picker for Video Recorder View
+    video_file_picker = ft.FilePicker()
+    page.overlay.append(video_file_picker)
+
+    # Create file picker for Emoji Maker View
+    emoji_file_picker = ft.FilePicker()
+    page.overlay.append(emoji_file_picker)
+
     def get_view(index):
         """Get or recreate view for the given index"""
         if index == 0:
@@ -61,6 +71,14 @@ def main(page: ft.Page):
             return ExifView()
         elif index == 5:
             return ColorPaletteView(page, palette_file_picker)
+        elif index == 6:
+            view = VideoRecorderView(page, video_file_picker)
+            video_file_picker.on_result = view.on_file_picked
+            return view
+        elif index == 7:
+            view = EmojiMakerView(page, emoji_file_picker)
+            emoji_file_picker.on_result = view.on_file_selected
+            return view
 
     def on_nav_change(e):
         nonlocal current_view_index
@@ -105,6 +123,16 @@ def main(page: ft.Page):
                 icon=ft.Icons.PALETTE, 
                 selected_icon=ft.Icons.PALETTE_ROUNDED, 
                 label="Palette"
+            ),
+            ft.NavigationRailDestination(
+                icon=ft.Icons.VIDEOCAM, 
+                selected_icon=ft.Icons.VIDEOCAM_ROUNDED, 
+                label="Recorder"
+            ),
+            ft.NavigationRailDestination(
+                icon=ft.Icons.EMOJI_EMOTIONS, 
+                selected_icon=ft.Icons.EMOJI_EMOTIONS_ROUNDED, 
+                label="Emoji"
             ),
         ],
         on_change=on_nav_change,

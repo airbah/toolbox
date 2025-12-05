@@ -1,6 +1,9 @@
 import flet as ft
 import threading
 import time
+import os
+import subprocess
+import sys
 from typing import List, Optional
 from utils.styles import ColorPalette, TextStyles
 from utils.duplicate_finder import DuplicateFinder, DuplicateGroup
@@ -255,7 +258,12 @@ class DuplicatesView(ft.Container):
 
     def open_file(self, path: str):
         try:
-            self.page.launch_url(f"file://{path}")
+            if sys.platform == "win32":
+                os.startfile(path)
+            elif sys.platform == "darwin":
+                subprocess.run(["open", path], check=True)
+            else:
+                subprocess.run(["xdg-open", path], check=True)
         except Exception as e:
             self.page.snack_bar = ft.SnackBar(ft.Text(f"Could not open file: {e}"))
             self.page.snack_bar.open = True
@@ -265,8 +273,8 @@ class DuplicatesView(ft.Container):
         # Enable delete button if any checked
         any_checked = False
         for card in self.results_list.controls:
-            # Access the column of files
-            files_col = card.content.content.controls[1]
+            # Access the column of files (index 2: after header row and divider)
+            files_col = card.content.content.controls[2]
             for row in files_col.controls:
                 # Checkbox is the first item in the Row
                 checkbox = row.controls[0]
@@ -280,7 +288,7 @@ class DuplicatesView(ft.Container):
 
     def select_all(self, select: bool):
         for card in self.results_list.controls:
-            files_col = card.content.content.controls[1]
+            files_col = card.content.content.controls[2]
             for row in files_col.controls:
                 checkbox = row.controls[0]
                 checkbox.value = select
@@ -289,7 +297,7 @@ class DuplicatesView(ft.Container):
     def select_smart(self, criteria: str):
         for i, card in enumerate(self.results_list.controls):
             group = self.duplicate_groups[i]
-            files_col = card.content.content.controls[1]
+            files_col = card.content.content.controls[2]
             
             # Sort files in group based on criteria
             if criteria == "newest":
@@ -311,7 +319,7 @@ class DuplicatesView(ft.Container):
     def delete_selected(self, e):
         files_to_delete = []
         for card in self.results_list.controls:
-            files_col = card.content.content.controls[1]
+            files_col = card.content.content.controls[2]
             for row in files_col.controls:
                 checkbox = row.controls[0]
                 if checkbox.value:
