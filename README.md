@@ -4,7 +4,7 @@ Application de bureau Flet regroupant plusieurs outils pour gérer et nettoyer v
 
 - 🎯 **Productivité** : actions groupées, raccourcis clairs, feedback immédiat.
 - 🖼️ **Images** : OCR pour captures d'écran, extraction de palettes, pipette intégrée, création d'emojis.
-- 🗂️ **Fichiers** : renommage en masse, détection intelligente des doublons.
+- 🗂️ **Fichiers** : renommage en masse, détection intelligente des doublons, tri automatique de factures.
 - 🎬 **Vidéo** : enregistrement d'écran avec audio système.
 
 ---
@@ -18,6 +18,7 @@ Application de bureau Flet regroupant plusieurs outils pour gérer et nettoyer v
 | Palette de couleurs | Extraire les couleurs dominantes d'une image. | Support JPG/PNG/WebP, zoom + pipette, copie HEX, suppression d'une couleur. |
 | Video Recorder | Enregistrer l'écran avec audio système. | Sélection de région, sauvegarde des zones favorites, pause/reprise, gestion des enregistrements. |
 | Emoji Maker | Convertir des images en emojis. | Redimensionnement automatique, plusieurs tailles (32-256px), bibliothèque d'emojis sauvegardés. |
+| Factures | Trier automatiquement les factures du dossier Téléchargements. | Détection intelligente (mots-clés, montants, TVA), extraction du nom de société, liste de sociétés personnalisable, classement par société. |
 | File Sorter (à venir) | Préparer un tri automatique. | Interface prête, logique à finaliser. |
 | EXIF Cleaner (à venir) | Nettoyer les métadonnées EXIF. | Écran placeholder en attendant l'implémentation. |
 
@@ -83,14 +84,17 @@ views/               # Composants UI par fonctionnalité
   ├── exif_view.py
   ├── color_palette_view.py
   ├── video_recorder_view.py
-  └── emoji_maker_view.py
-utils/               # Helpers (styles, fichiers, doublons, OCR, vidéo, emoji)
+  ├── emoji_maker_view.py
+  └── invoice_sorter_view.py
+utils/               # Helpers (styles, fichiers, doublons, OCR, vidéo, emoji, factures)
   ├── styles.py
   ├── file_manager.py
   ├── duplicate_finder.py
   ├── ocr_helper.py
   ├── video_recorder.py
-  └── emoji_maker.py
+  ├── emoji_maker.py
+  ├── invoice_detector.py
+  └── settings_manager.py
 requirements.txt     # Dépendances Python
 install.bat          # Script d'installation Windows
 run.bat              # Script de lancement Windows
@@ -109,6 +113,9 @@ run.bat              # Script de lancement Windows
 | mss | Capture d'écran |
 | pyaudiowpatch | Capture audio système (Windows) |
 | send2trash | Suppression sécurisée vers corbeille |
+| pdfplumber | Extraction de texte des PDF |
+| PyPDF2 | Lecture de fichiers PDF |
+| python-docx | Lecture de fichiers Word |
 
 ---
 
